@@ -3,8 +3,7 @@
 import turtle
 import time
 import os
-
-
+import pygame
 
 wn = turtle.Screen()
 wn.bgcolor("black")
@@ -80,6 +79,10 @@ def getGrid(file):
 def eatCheese(x, y):
     for z in range(len(cheeses)):
         if(x == cheeses[z][0] and y == cheeses[z][1]):
+            burp = pygame.mixer.Sound("burp.wav")
+            burp.play()
+            time.sleep(2)
+            burp.stop()
             print('Burp!!')
 
 def setup_maze(grid):
@@ -162,7 +165,8 @@ def backRoute(x, y):
         x, y = solution[x, y]
         eatCheese(x,y)
 
-
+pygame.init()
+pygame.mixer.init()
 maze = Maze()
 red = Red()
 blue = Blue()
@@ -172,7 +176,7 @@ chesse = Cheese()
 walls = []
 path = []
 visited = []
-burp = os.path.abspath('arroto.mp3')
+# burp = os.path.abspath('arroto.mp3')
 frontier = []
 solution = {}
 file = 'maze.txt'
